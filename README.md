@@ -54,7 +54,7 @@ This Python script checks a list of proxies from a file, using user agents to av
 
 ## License
 
-This project is licensed under the GNP License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL License - see the [LICENSE](LICENSE) file for details.
 ```
 
 ### Explanation:

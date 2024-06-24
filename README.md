@@ -57,18 +57,6 @@ This Python script checks a list of proxies from a file, using user agents to av
 This project is licensed under the GPL License - see the [LICENSE](LICENSE) file for details.
 ```
 
-### Explanation:
-
-- **Description**: The `README.md` overviews what the script does, emphasizing its features like proxy checking, multithreading, and timeout handling.
-- **Requirements**: Lists the Python version required and dependencies (`requests` and `fake_useragent` libraries).
-- **Usage**: Provides step-by-step instructions on clone the repository, install dependencies, prepare the proxies file, run the script, and customize parameters if needed.
-- **Notes**: Includes important notes on proxy reliability, responsible usage, and respect for website policies.
-- **License**: Specifies the project's license (MIT License in this example) and refers to the `LICENSE` file for more details.
-
-This revised `README.md` file provides a clear and concise guide for users to understand, use, and contribute to your proxy checker script on GitHub, without highlighting the specific details of using random user agents.
-
-
-
 
 
 

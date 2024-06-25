@@ -33,7 +33,7 @@ def load_progress(file_name='progress.txt'):
 def check_proxy(proxy):
     test_url = "http://httpbin.org/ip"
     try:
-        response = requests.get(test_url, proxies={"http": proxy, "https": proxy}, timeout=5)
+        response = requests.get(test_url, proxies={"http": proxy, "https": proxy}, timeout=7)
         if response.status_code == 200:
             with open('live.txt', 'a') as live_file:
                 live_file.write(proxy + '\n')
@@ -49,7 +49,7 @@ def check_proxies(proxies, max_workers, progress_tracker):
     return results
 
 # Function to check internet connection
-def check_internet(url='http://www.google.com', timeout=5):
+def check_internet(url='http://www.google.com', timeout=7):
     try:
         _ = requests.get(url, timeout=timeout)
         return True
@@ -61,8 +61,9 @@ def track_progress(total_proxies, completed_proxies):
     while True:
         time.sleep(10)
         progress = (completed_proxies[0] / total_proxies) * 100
-        print(f"Progress: {progress:.2f}%")
-
+        print(f"\n \n Progress: {progress:.2f}%")
+        print(f"\n \n Progress: {progress:.2f}%")
+        print(f"\n \n Progress: {progress:.2f}%")
 # Main function
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Check proxies from a file.')
@@ -76,7 +77,7 @@ if __name__ == "__main__":
     progress_file = 'progress.txt'
     remaining_proxies = load_progress(progress_file) or proxies
     
-    max_workers = 128  # 8 cores * 16 threads per core
+    max_workers = 1024  # 8 cores * 8 threads per core
 
     if remaining_proxies:
         total_proxies = len(remaining_proxies)

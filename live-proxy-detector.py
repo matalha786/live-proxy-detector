@@ -33,7 +33,7 @@ def load_progress(file_name='progress.txt'):
 def check_proxy(proxy):
     test_url = "http://httpbin.org/ip"
     try:
-        response = requests.get(test_url, proxies={"http": proxy, "https": proxy}, timeout=7)
+        response = requests.get(test_url, proxies={"http": proxy, "https": proxy}, timeout=9)
         if response.status_code == 200:
             with open('live.txt', 'a') as live_file:
                 live_file.write(proxy + '\n')
@@ -49,7 +49,7 @@ def check_proxies(proxies, max_workers, progress_tracker):
     return results
 
 # Function to check internet connection
-def check_internet(url='http://www.google.com', timeout=7):
+def check_internet(url='http://www.google.com', timeout=9):
     try:
         _ = requests.get(url, timeout=timeout)
         return True
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     progress_file = 'progress.txt'
     remaining_proxies = load_progress(progress_file) or proxies
     
-    max_workers = 1024  # 8 cores * 8 threads per core
+    max_workers = 512  # 8 cores * 8 threads per core
 
     if remaining_proxies:
         total_proxies = len(remaining_proxies)

@@ -1,5 +1,6 @@
 import os
 import requests
+import argparse
 import time
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -64,14 +65,18 @@ def track_progress(total_proxies, completed_proxies):
 
 # Main function
 if __name__ == "__main__":
-    file_name = input("Enter the name of the file containing the proxies: ")
+    parser = argparse.ArgumentParser(description='Check proxies from a file.')
+    parser.add_argument('file', metavar='filename', type=str, help='Path to the file containing proxies')
+    args = parser.parse_args()
+
+    file_name = args.file
     proxies = read_proxies(file_name)
     
     # Load progress if available
     progress_file = 'progress.txt'
     remaining_proxies = load_progress(progress_file) or proxies
     
-    max_workers = 32  # 8 cores * 4 threads per core
+    max_workers = 64  # 8 cores * 8 threads per core
 
     if remaining_proxies:
         total_proxies = len(remaining_proxies)
@@ -94,10 +99,11 @@ if __name__ == "__main__":
                 proxy_results = check_proxies(remaining_proxies, max_workers, progress_tracker)
                 remaining_proxies = [proxy for proxy, status in proxy_results if status == "dead"]
                 save_progress(remaining_proxies, progress_file)
-                print("\nSummary:")
-                for proxy, status in proxy_results:
-                    print(f"{proxy} is {status}")
-                break
+                break  # No need to print summary anymore
             else:
                 print("\nInternet connection is disconnected. Please check your connection and restart the program.")
                 time.sleep(10)  # Wait for 10 seconds before rechecking the connection
+        
+        # Delete progress file after completion
+        if os.path.exists(progress_file):
+            os.remove(progress_file)

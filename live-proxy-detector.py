@@ -76,7 +76,7 @@ if __name__ == "__main__":
     progress_file = 'progress.txt'
     remaining_proxies = load_progress(progress_file) or proxies
     
-    max_workers = 64  # 8 cores * 8 threads per core
+    max_workers = 128  # 8 cores * 16 threads per core
 
     if remaining_proxies:
         total_proxies = len(remaining_proxies)
